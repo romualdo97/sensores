@@ -8,12 +8,15 @@ Es importante saber sí el led es de luz difusa *(diffuse leds)* o luz limpia "(
 # 2) ¿Qué aplicaciones pueden tener los LED en aplicaciones interactivas? (se vale buscar referentes diferente a los de las lecturas)
 
 **Indicar fuerza de golpe**
+
 ![enter image description here](https://i.imgur.com/3NMfyvK.jpg)
 
 **Indicar fuerza de tackleo**
+
 ![enter image description here](https://www.marketingdirecto.com/wp-content/uploads/2012/06/salta.jpg)
 
 **Animar un camino**
+
 ![enter image description here](https://static.webshopapp.com/shops/001680/files/002975793/reflector-del-camino-led-solar.jpg)
 
 ---
