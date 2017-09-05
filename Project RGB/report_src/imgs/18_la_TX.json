@@ -1,0 +1,23 @@
+{signal: [
+  {name:'...', wave: 'N.................' },
+  {name:'...', wave: '00.1.01.1010...1.1' }
+],
+head: {text:
+  ['tspan',
+   ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'l (108 = 1101100) '],
+   ['tspan', {class:'info h4'}, '____________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+      ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'a (97 = 1100001) '],
+   ['tspan', {class:'info h4'}, '____________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+  ]
+}
+}

@@ -121,9 +121,13 @@ La interfaz serial puede enviar una sola unidad de información a la vez mientra
 
 > Comparación entre interfaz paralela y serial.
 
+---
+
 # 13) ¿Cuál es la diferencia entre una comunicación serial sincrónica y asíncrona?
 
 Todos los dispositivos en una interfaz serial sincrónica comparten el mismo reloj (estas interfaces pueden ser mas rápidas en la transmisión pero requieren un cable extra para transmitir datos), en contraste con los circuitos asíncronos donde por lo general cada dispositivo utiliza su propio reloj.
+
+---
 
 # 14) ¿Cuáles son los niveles lógicos del microcontrolador ATmega328P (arduino UNO)? 
 
@@ -151,6 +155,8 @@ In order to ensure general compatibility, you will notice that most of the volta
 ![.](https://i.imgur.com/jLCJjkU.png)
 ![enter image description here](https://i.imgur.com/FQ29TP8.png)
 ![enter image description here](https://i.imgur.com/t1bRdYX.png)
+
+---
 
 # 15) En base a la respuesta anterior qué debe considerar al conectar, por medio de una interfaz serial, un micro-controlador que opera a 5V con un sensor o actuador que opera a 3V o 3.3V
 
@@ -183,3 +189,67 @@ Por ejemplo un sensor que envia 9600 bits cada segundo por medio de una interfaz
 # 18) ¿Cómo se aplica el concepto de endian cuando se realiza una comunicación serial?
 
 Haciendo acuerdo entre los dispositivos de enviar primero el bit mas significativo o el menos significativo.
+
+![enter image description here](https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/400px-Big-Endian.svg.png)
+
+![enter image description here](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/400px-Little-Endian.svg.png)
+
+> La nomenclatura de los criterios little-endian y big-endian proviene de la novela Los viajes de Gulliver de Jonathan Swift, hace referencia a una sociedad donde había dos grupos enemistados, uno sostenía que los huevos duros se tenían que empezar a comer por el extremo grande (big end) o otros por el pequeño (little end). De ahí que big endian se debe entender como "de comienzo por el extremo mayor" y little endian como "de comienzo por el extremo pequeño", aunque es propenso a confundirse con "acaba en grande" y "acaba en pequeño". Su etimología proviene de un juego de palabras en inglés con los términos compuestos little-end-in y big-end-in. 
+> ***Extracted from:***  [Endianness](https://es.wikipedia.org/wiki/Endianness)
+
+---
+
+# 19) Realice un diagrama de tiempo donde muestre cómo se vería el mensaje hola mundo enviado desde el Arduino UNO con la función Serial.println(“Hola Mundo”) a otro arduino UNO.
+
+![enter image description here](https://i.imgur.com/LkyUAf8.png)
+
+![enter image description here](https://i.imgur.com/8pfliHr.png)
+
+![enter image description here](https://i.imgur.com/K2EFH4h.png)
+
+![enter image description here](https://i.imgur.com/Cxiovsp.png)
+
+![enter image description here](https://i.imgur.com/ViYeJtM.png)
+
+![enter image description here](https://i.imgur.com/NffWSm3.png)
+
+---
+
+# 20) Muestre un diagrama que ilustre cómo se realizaría la conexión a nivel de hardware entre los dos arduinos del punto anterior.
+
+![enter image description here](http://robotic-controls.com/sites/default/files/learn/Arduino-ArduinoSerial.png)
+
+---
+
+# 21) Descargue el diagrama esquemático de un arduino UNO R3. 
+
+**IDENTIFIQUE**: cómo se conecta al computador, cómo se conectan el puerto serial a los conectores externos de la tarjeta.
+
+![enter image description here](https://i.imgur.com/JLek0yM.png)
+
+Los pines diferenciales D+ y D- de la interfaz USB-B se conectan a los pines 30 y 29 del ATMEGA16U2. 
+
+![enter image description here](https://i.imgur.com/Bib4UtP.png)
+
+Los conectores externos 0 y 1 de la tarjeta arduino están conectados a los pines RXD (pin 2 del ATMEGA328P)  y TXD (pin 3 del ATMEGA328P) respectivamente, así mismo los conectores externos están conectados también a los pines 9 y 8 del ATMEGA16U2 que funciona como un puente entre la interfaz USB del computador y el procesador principal del puerto serial en el ATMEGA328P.
+
+---
+
+# 22) ¿Cuál es la diferencia entre comunicaciones seriales TTL y comunicaciones seriales RS232?
+
+La capa física de las interfaces TTL tiene 2 pines mientras que las del RS232 posee 9 pines, los niveles lógicos de voltajes son mayores en el RS232 **[-5v, 5v]** o **[-12v, 12v]** con respecto al TTL **[0v, 5v]** o **[0v, 3.3v]**, ademas el RS232 utiliza lógica inversa.
+
+---
+
+# 23) ¿Qué es una UART?
+
+![enter image description here](http://www.circuitbasics.com/wp-content/uploads/2016/01/Introduction-to-UART-Data-Transmission-Diagram.png)
+
+Las siglas significan *Universal Asynchronous Receiver-Transmitter*, en español: **Transmisor-Receptor Asíncrono Universal** no es un protocolo de comunicación como SPI o I2C pero si un circuito electrónico físico, su tarea principal es enviar y recibir datos en serial.
+
+En las comunicaciones con UARTs se necesitan dos UARTs, la UART que transmite convierte datos paralelos desde algún dispositivo controlador como una CPU en datos seriales. La UART receptora luego convierte los datos seriales en paralelos para el dispositivo receptor.
+
+![enter image description here](http://www.circuitbasics.com/wp-content/uploads/2016/01/Introduction-to-UART-Basic-Connection-Diagram-300x147.png)
+> solo se necesitan dos cables para transmitir información entre las UARTs
+
+Las UARTs transmiten los datos de forma paralela, es decir que no se usan señales de reloj para sincronizar los datos, en vez de esto los paquetes de información son enviados con un par de bits que indican el inicio de la transmisión y el final.

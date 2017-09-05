@@ -1,0 +1,40 @@
+{signal: [
+  {name:'clock', wave: 'N....................................' },
+  {name:'tx', wave: '100..10.1101...01.100.1.01.101.0...1' }
+],
+head: {text:
+  ['tspan',
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'muted h4'}, 'idle '],
+   
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'H (72 = 1001000) '],
+   ['tspan', {class:'info h4'}, '___________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+   ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'o (111 = 1101111) '],
+   ['tspan', {class:'info h4'}, '___________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+   ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'l (108 = 1101100) '],
+   ['tspan', {class:'info h4'}, '___________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+      ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'success h4'}, 'start'],
+    ['tspan', {class:'info h4'}, '|'],
+    ['tspan', {class:'warning h4'}, 'a (97 = 1100001) '],
+   ['tspan', {class:'info h4'}, '___________|'],
+    ['tspan', {class:'error h4'}, 'end '],
+   
+  ]
+}
+}
