@@ -361,11 +361,15 @@ Nos conectamos al arduino mediante Bluetooth
 
 ![enter image description here](https://i.imgur.com/aQvjO91.png)
 
-Escuchamos por cambios en la posicion del slider rojo
+Escuchamos por cambios en la posición del slider rojo.
+
+![enter image description here](https://i.imgur.com/afjPwPO.png)
+
+Escuchamos por cambios en la posición del slider verde.
 
 ![enter image description here](https://i.imgur.com/qc4mrwv.png)
 
-![enter image description here](http://romualdo97.imgur.com/all/)
+Escuchamos por cambios en la posición del slider azul.
 
 ![enter image description here](https://i.imgur.com/3oGcTgn.png)
 
