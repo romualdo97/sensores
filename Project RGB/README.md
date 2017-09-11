@@ -253,3 +253,290 @@ En las comunicaciones con UARTs se necesitan dos UARTs, la UART que transmite co
 > solo se necesitan dos cables para transmitir información entre las UARTs
 
 Las UARTs transmiten los datos de forma paralela, es decir que no se usan señales de reloj para sincronizar los datos, en vez de esto los paquetes de información son enviados con un par de bits que indican el inicio de la transmisión y el final.
+
+---
+
+# 24) Explique ¿Cuáles son los errores más comunes a la hora de conectar dispositivos por puerto serial?
+
+Intentar conectar dos dispositivos al mismo puerto serial y tener baud rates distintos entre los dispositivos seriales.
+
+---
+
+# 25) ¿Qué sensores utiliza el proyecto 2 del texto guía?
+
+El proyecto 2 del texto guia utiliza *2 flex sensor resistors* que permiten medir qué tanto se dobla una superficie.
+
+---
+
+# 26) ¿Cómo funcionan los sensores del punto anterior? 
+
+[Flex Sensor Hookup Guide](https://learn.sparkfun.com/tutorials/flex-sensor-hookup-guide)
+
+One side of the sensor is printed with a polymer ink that has conductive particles embedded in it.
+Un lado del sensor está pintado con una tinta que tiene partículas conductivas.
+
+![enter image description here](https://cdn.sparkfun.com/assets/learn_tutorials/5/1/1/how-it-works-straight.png)
+
+Cuando el sensor no esta doblado las partículas conductivas estan mas proximas y por tanto la resistencia es menor.
+
+![enter image description here](https://cdn.sparkfun.com/assets/learn_tutorials/5/1/1/how-it-works-bent.png)
+
+Cuando el sensor se dobla las partículas conductivas se separan y por tanto aumenta la resistencia.
+
+---
+
+# 27) ¿Qué usos pueden tener los sensores del punto anterior en aplicaciones de interacción? 
+
+Podrían ser usados como sensor para conocer qué tanto se abre una puerta y provocar un sonido tenebroso dependiendo del nivel de apertura, o también para simular el acelerador de un automóvil y aumentar la cantidad de viento que percibe el usuario.
+
+---
+
+# 28) Explique ¿Cuál es la diferencia entre los métodos println y write utilizados con el objetos Serial? Muestre ejemplos con código que ilustren la diferencia.
+
+    Serial.println(48); // prints 48\n (52, 57, 10) into serial monitor 
+	Serial.write(48); // prints 0 into serial monitor (sin salto de linea)
+	
+	Serial.println("A"); // prints A\n (65, 10) into serial monitor
+	Serial.println("A"); // prints A (65) into serial monitor (sin salto de linea)
+
+---
+
+# 29) Explique el protocolo de comunicación, utilizado en el proyecto 2 del texto guía, para comunicar el arduino con processing.
+
+> 284,284,1,1,
+
+Los primeros tres números indicaran el nivel de flexión del primer brazo del monkey, los siguientes tres números  indicaran lo mismo para el brazo izquierdo del monkey, los últimos dos números indican si reiniciar el juego o servir la pelotita de pong.
+
+---
+
+# RETO PROTOCOLO RGB
+
+## **Vídeo**
+
+[Ver vídeo aquí](https://youtu.be/L6jDSlN3500)
+
+![enter image description here](https://i.imgur.com/ttazoJV.png)
+> En el vídeo se muestra como variando tres sliders podemos seleccionar un color del espacio de color RGB
+
+## **Esquemático**
+
+![enter image description here](https://i.imgur.com/6VYxIFI.png)
+
+> Se conecta el TX de la uart del bluetooth con el RX de la uart del arduino (Esta implementación no necesita que el arduino transmita datos a la tableta android).
+
+## **Aplicación**
+
+Es necesario mover los slider R, G y B para poder recorrer el susodicho espacio de color.
+
+![enter image description here](https://i.imgur.com/tNrk5ud.png)
+
+![enter image description here](https://i.imgur.com/1yQ8TKf.png)
+
+![enter image description here](https://i.imgur.com/a5Kutnm.png)
+
+
+## **Código fuente en AppInventor**
+
+Iniciamos variables globales para mantener el estado de las componentes del vector de color RGB.
+
+![enter image description here](https://i.imgur.com/uyRdPou.png)
+
+Definimos una función para decidir que pantalla tener encendida.
+
+![enter image description here](https://i.imgur.com/H5YbLmf.png)
+
+Definimos una función encargada de todas las acciones de dibujo y visualizacion.
+
+![enter image description here](https://i.imgur.com/UIkYa7L.png)
+
+Hacemos que la pantalla cero sea visible cuando inicia la aplicación
+
+![enter image description here](https://i.imgur.com/i5FXdvK.png)
+
+Mostramos una lista de conexiones disponibles.
+
+![enter image description here](https://i.imgur.com/gZQKCRE.png)
+
+Nos conectamos al arduino mediante Bluetooth
+
+![enter image description here](https://i.imgur.com/aQvjO91.png)
+
+Escuchamos por cambios en la posicion del slider rojo
+
+![enter image description here](https://i.imgur.com/qc4mrwv.png)
+
+![enter image description here](http://romualdo97.imgur.com/all/)
+
+![enter image description here](https://i.imgur.com/3oGcTgn.png)
+
+## **Código fuente en Arduino Leanoardo**
+
+El siguiente programa se encarga de gestionar los mensajes que recibe, es decir gestionar los mensajes del protocolo RGB y guardar los cambios en la memoria EEPROM del Arduino.
+
+    #include <string.h>
+	#include <EEPROM.h>
+	
+	#define DEBUG_MODE
+	// #define DEBUG_MODE_4_SERIAL1
+	
+	#define MAX_BUFF_SIZE 16  // (RGB=123,123,123\n).size() == 16
+	
+	#define PIN_4_RED 5
+	#define PIN_4_GREEN 6
+	#define PIN_4_BLUE 9
+	
+	byte red_val = 0;
+	byte green_val = 0;
+	byte blue_val = 0;
+	
+	// find the number of digits in the array arr 
+	// of length len
+	uint8_t get_num_of_digits(char *arr)
+	{
+	  uint8_t num_dig = 0; // num of digits
+	  
+	  if (isDigit(arr[0])) 
+	  {    
+	    num_dig++;
+	  }
+	  if (isDigit(arr[0]) && isDigit(arr[1]) ) 
+	  {    
+	    num_dig++;
+	  }
+	  if (isDigit(arr[0]) && isDigit(arr[1]) && isDigit(arr[2])) 
+	  {    
+	    num_dig++;
+	  }
+	  return num_dig;
+	}
+	
+	bool is_usage_error(char *myBuff)
+	{
+	  // return a pointer to the first occurence of characters "RGB=" in storage_buffer
+	  char *RGB_tag = strchr(myBuff, 'R');
+	  bool isNoRGB_tag = RGB_tag[0] != 'R' || RGB_tag[1] != 'G' || RGB_tag[2] != 'B' || RGB_tag[3] != '=';
+	  if (isNoRGB_tag) 
+	  {
+	    #ifdef DEBUG_MODE
+	    Serial.println("ERROR::USAGE::NO_RGB_TAG_FOUND");
+	    #endif
+	    return true;
+	  }
+	  return false;
+	}
+	
+	byte get_chanel_value(uint8_t num_digits, char *arr)
+	{
+	  byte chnl_value = 0;
+	  for (int i=0; i < num_digits; i++)
+	  {
+	    chnl_value *= 10;
+	    chnl_value += arr[i] - 48;
+	  }
+	  
+	  return chnl_value;
+	}
+	
+	void process_buffer(const char *myBuff)
+	{
+	  #ifdef DEBUG_MODE
+	  Serial.println(myBuff);
+	  #endif
+	  
+	  if (is_usage_error(myBuff))
+	  {
+	    #ifdef DEBUG_MODE
+	    Serial.println("This running");
+	    #endif
+	    return;
+	  }
+	  
+	  // return a pointer to the first occurence of character '=' in storage_buffer
+	  char *q = strchr(myBuff, '=');
+	
+	  // find num of digits for RED channel
+	  char *red_ch = q + 1; // array for red channe.
+	  uint8_t num_dig = get_num_of_digits(red_ch);
+	  red_val = get_chanel_value(num_dig, red_ch);
+	  #ifdef DEBUG_MODE
+	  Serial.print("Red val: ");
+	  Serial.print(red_val); Serial.print("\n");
+	  #endif
+	  analogWrite(PIN_4_RED, red_val);
+	  EEPROM.update(3, red_val);
+	
+	  // find num of digits for GREEN channel
+	  char *green_ch = red_ch + num_dig + 1;
+	  num_dig = get_num_of_digits(green_ch);
+	  green_val = get_chanel_value(num_dig, green_ch);
+	  #ifdef DEBUG_MODE
+	  Serial.print("Green val: ");
+	  Serial.print(green_val); Serial.print("\n");
+	  #endif
+	  analogWrite(PIN_4_GREEN, green_val);
+	  EEPROM.update(4, green_val);
+	
+	  // find num of digits for BLUE channel
+	  char *blue_ch = green_ch + num_dig + 1;
+	  num_dig = get_num_of_digits(blue_ch);
+	  blue_val = get_chanel_value(num_dig, blue_ch);
+	  #ifdef DEBUG_MODE
+	  Serial.print("Blue val: ");
+	  Serial.print(blue_val); Serial.print("\n");
+	  #endif
+	  analogWrite(PIN_4_BLUE, blue_val);
+	  EEPROM.update(5, blue_val);
+	}
+	
+	void process_incoming_byte(const char inByte)
+	{
+	  static char storage_buffer[MAX_BUFF_SIZE];
+	  static uint8_t count = 0;
+	  // if end then add null char
+	  // else add the incoming byte to buffer
+	  if (inByte == 0x0A) // inByte == New Line
+	  {
+	    storage_buffer[count] = 0;
+	    process_buffer(storage_buffer);
+	    storage_buffer[0] = '\0';
+	    count = 0;
+	  }
+	  else 
+	  {
+	    storage_buffer[count] = inByte;
+	    count++;
+	  }
+	}
+	
+	void setup() 
+	{
+	  EEPROM.get(3, red_val);
+	  EEPROM.get(4, green_val);
+	  EEPROM.get(5, blue_val);
+	  
+	  pinMode(PIN_4_RED, OUTPUT);
+	  pinMode(PIN_4_GREEN, OUTPUT);
+	  pinMode(PIN_4_BLUE, OUTPUT);
+	
+	  analogWrite(PIN_4_RED, red_val);
+	  analogWrite(PIN_4_GREEN, green_val);
+	  analogWrite(PIN_4_BLUE, blue_val);
+	  
+	  Serial.begin(9600);
+	  Serial1.begin(9600);
+	}
+	
+	void loop() 
+	{
+	  while (Serial1.available())
+	  {
+	    byte data = Serial1.read();
+	    #ifdef DEBUG_MODE_4_SERIAL1
+	    Serial1.write(data);
+	    #endif
+	    #ifdef DEBUG_MODE
+	    Serial.write(data);
+	    #endif
+	    process_incoming_byte(data);
+	  }
+	}
