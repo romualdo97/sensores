@@ -84,3 +84,22 @@ A continuacion **una breve comparación entre Kinect v1.0 y v2.0** tomadas de [a
 | **Rastreo del cuerpo** | Capacidad para detectar 6 personas, pero solo dos se pueden rastrear completamente; Por cuerpo rastreado, capaz de identificar 20 articulaciones      |Capacidad para detectar 6 cuerpos, todos completamente rastreados.; Por cuerpo rastreado, capaz de identificar 25 articulaciones|
 | **Motor de Inclinación**     | Si. Motor puede graduarse entre +27 grados y –27 grados.| No. Tiene mayor ángulo de visión. Sin embargo, en caso de que se requiera, se puede graduar manualmente su inclinación. |
 | **USB**     | 2.0 | 3.0; Controlador dedicado |
+
+
+# 6) ¿Que FrameWorks y librerias existentes puedo usar para desarrollar aplicaciones con soporte Kinect?
+
+### SimpleOpenNI [C++]
+
+### OpenNI [C++]
+
+###  libfreenect [C++]
+
+###  libfreenect2 [C++]
+
+### ofxKinect for OpenFrameworks [C++]
+
+### Kinect CinderBlock for Cinder [C++]
+
+### Unity packages apps [C#].
+
+### Open Kinect [Processing]
