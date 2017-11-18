@@ -1,2 +1,2 @@
 # sensores
-Repositorio para curso de sensores y actuadores
+Repositorio para documentar estudio de distintos sensores y actuadores 
