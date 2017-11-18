@@ -2,6 +2,8 @@
 
 ¿Conceptualmente hablando, como funciona un Kinect?
 
+¿Que otras tecnologias como kinect existen?
+
 ¿Que informacion transmite un Kinect?
 
 ¿Cuales son los distintos tipos de Kinect?
@@ -10,7 +12,7 @@
 
 	https://www.google.com.co/search?q=que+puede+reconocer+un+kinect&oq=que+puede+reconocer+un+kinect&aqs=chrome..69i57.4655j0j7&sourceid=chrome&ie=UTF-8
 
-¿Que FrameWorks y librerias existentes puedo usar para programar un Kinect?
+¿Que FrameWorks y librerias existentes puedo usar para desarrollar aplicaciones con soporte Kinect?
 
 ¿Donde puedo encontrar documentacion, referencias y ejemplos de las distintas plataformas que puedo usar para programar Kinect?
 
